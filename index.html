@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Spider Web Effect</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script>
+            navigator.mediaDevices.getUserMedia({video:true})
+                .then(function(rawData){
+                    const video=document.createElement("video");
+                    video.srcObject=rawData;
+                    video.play();
+                    video.onloadeddata=function(){
+                        const canvas=document.getElementById("myCanvas");
+                        canvas.width=video.videoWidth;
+                        canvas.height=video.videoHeight;
+
+                        const wse=new WebShooterEffect(canvas,video);
+                    }
+                }).catch(function(err){alert(err)})
+        </script>
+        <script src="webshooter.js"></script>
+        <script src="utils.js"></script>
+    </body>
+</html>
